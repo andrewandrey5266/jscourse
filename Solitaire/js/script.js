@@ -31,9 +31,22 @@ function Game() {
 	this.$stashContainer = document.getElementById('stashDecks');
 	this.$playContainer = document.getElementById('playDecks');
 	this.$container = document.getElementById('game');
+	this.$playContainer.addEventListener("click", cardClick);
+
 
 	this.createDecks();
 	this.registerEvents();
+}
+
+function cardClick(e)
+{
+	document.querySelectorAll(".selected").forEach(function(e){
+		e.classList.remove("selected");
+	})
+	if(event.target.classList.contains("open"))
+	{
+		event.target.classList.add("selected");
+	}
 }
 
 function DealDeck() {
