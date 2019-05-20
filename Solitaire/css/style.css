@@ -47,7 +47,7 @@ html,body {
 	box-sizing: border-box;
 	border: 2px solid #cac6c6;
 	grid-column: 1;
-	margin-top: -160px;
+	margin-top: -140px;
 }
 
 p + span {

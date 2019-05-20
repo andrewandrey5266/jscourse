@@ -40,9 +40,51 @@ function Game() {
 
 function cardClick(e)
 {
+	
+
+	var selectedCards = document.querySelectorAll(".selected");
+	if(selectedCards.length == 1)
+	{
+		if(selectedCards[0].parentElement != event.target.parentElement
+			&& (event.target.classList.contains("card") || event.target.classList.contains("deck"))){
+
+		selectedCards[0].classList.remove("selected");
+
+		var selectedElements = new Array(selectedCards[0]);
+		var selectedParent = selectedCards[0].parentElement;
+		var nextElementSibling = selectedCards[0].nextElementSibling;
+		selectedParent.removeChild(selectedCards[0]);
+
+		while(nextElementSibling != null){
+			selectedElements.push(nextElementSibling);
+			var nextElementSibling1 = nextElementSibling.nextElementSibling;
+			selectedParent.removeChild(nextElementSibling);
+			nextElementSibling = nextElementSibling1;
+		}
+
+			var newParent;
+			if(event.target.classList.contains("card")){
+				newParent = event.target.parentNode;
+			}else if (event.target.classList.contains("deck")){
+				newParent = event.target;
+			} else	{
+				throw new Exception("not implemented");
+			}
+
+			for(var i = 0; i < selectedElements.length; i++){
+				newParent.appendChild(selectedElements[i]);
+			}
+			if(selectedParent.lastElementChild != null){
+				selectedParent.lastElementChild.classList.add("open");
+			}
+			return;
+		}
+	}
+
 	document.querySelectorAll(".selected").forEach(function(e){
 		e.classList.remove("selected");
-	})
+	});
+
 	if(event.target.classList.contains("open"))
 	{
 		event.target.classList.add("selected");
